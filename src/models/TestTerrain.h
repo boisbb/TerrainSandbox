@@ -4,13 +4,13 @@
 #include <GLFW/glfw3.h>
 
 #include "TestModel.h"
-#include "../VertexBuffer.h"
-#include "../VertexBufferLayout.h"
-#include "../Texture.h"
-#include "../Camera.h"
-#include "../Model.h"
-#include "../CubeMap.h"
-#include "../Terrain.h"
+#include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
+#include "Texture.h"
+#include "Camera.h"
+#include "Model.h"
+#include "CubeMap.h"
+#include "Terrain.h"
 
 namespace test_model {
     class TestTerrain : public TestModel{

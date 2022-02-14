@@ -3,9 +3,13 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
+#include <math.h>
+#include <cmath>
 
 #include "Model.h"
 #include "ProceduralGeneration.h"
+
+#include "stb_image/stb_image.h"
 
 class Terrain {
 public:

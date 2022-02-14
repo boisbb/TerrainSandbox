@@ -1,7 +1,4 @@
 #include"Model.h"
-#include <iostream>
-#include <filesystem>
-#include <sys/stat.h>
 
 
 // Inspired by:

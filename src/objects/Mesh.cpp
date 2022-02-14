@@ -1,8 +1,4 @@
 #include "Mesh.h"
-#include <iostream>
-#include <cstddef>
-#include "vendor/glm/gtx/string_cast.hpp"
-
 
 Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices) 
     : m_Vertices(vertices), m_Indices(indices)

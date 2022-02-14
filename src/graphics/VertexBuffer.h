@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "vendor/glm/glm.hpp"
+#include "glm/glm.hpp"
 
 
 struct Vertex

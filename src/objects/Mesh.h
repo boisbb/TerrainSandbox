@@ -1,5 +1,6 @@
 #pragma once
-
+#include <iostream>
+#include <cstddef>
 #include <string>
 #include <vector>
 #include <memory>
@@ -9,6 +10,8 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Renderer.h"
+
+#include "glm/gtx/string_cast.hpp"
 
 class Mesh
 {
