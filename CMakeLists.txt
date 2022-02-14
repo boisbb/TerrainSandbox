@@ -24,33 +24,37 @@ set ( SOURCE
   src/models/TestModel.h
   src/models/TestTerrain.cpp
   src/models/TestTerrain.h
+  src/models/TestCubeTerrain.cpp
+  src/models/TestCubeTerrain.h
   src/Application.cpp
-  src/Camera.cpp
-  src/Camera.h
-  src/CubeMap.cpp
-  src/CubeMap.h
-  src/IndexBuffer.cpp
-  src/IndexBuffer.h
-  src/Mesh.cpp
-  src/Mesh.h
-  src/Model.cpp
-  src/Model.h
-  src/ProceduralGeneration.cpp
-  src/ProceduralGeneration.h
-  src/Renderer.cpp
-  src/Renderer.h
-  src/Shader.cpp
-  src/Shader.h
-  src/Terrain.cpp
-  src/Terrain.h
-  src/Texture.cpp
-  src/Texture.h
-  src/VertexArray.cpp
-  src/VertexArray.h
-  src/VertexBuffer.cpp
-  src/VertexBuffer.h
-  src/VertexBufferLayout.cpp
-  src/VertexBufferLayout.h
+  src/graphics/Camera.cpp
+  src/graphics/Camera.h
+  src/objects/CubeMap.cpp
+  src/objects/CubeMap.h
+  src/objects/CubeTerrain.cpp
+  src/objects/CubeTerrain.h
+  src/graphics/IndexBuffer.cpp
+  src/graphics/IndexBuffer.h
+  src/objects/Mesh.cpp
+  src/objects/Mesh.h
+  src/objects/Model.cpp
+  src/objects/Model.h
+  src/objects/ProceduralGeneration.cpp
+  src/objects/ProceduralGeneration.h
+  src/graphics/Renderer.cpp
+  src/graphics/Renderer.h
+  src/graphics/Shader.cpp
+  src/graphics/Shader.h
+  src/objects/Terrain.cpp
+  src/objects/Terrain.h
+  src/objects/Texture.cpp
+  src/objects/Texture.h
+  src/graphics/VertexArray.cpp
+  src/graphics/VertexArray.h
+  src/graphics/VertexBuffer.cpp
+  src/graphics/VertexBuffer.h
+  src/graphics/VertexBufferLayout.cpp
+  src/graphics/VertexBufferLayout.h
   
 )
 
@@ -77,3 +81,6 @@ find_package(assimp REQUIRED)
 target_link_libraries(TerrainGeneration assimp)
 
 include_directories(src/vendor/imgui/libs/imgui/)
+include_directories(src/graphics/)
+include_directories(src/objects/)
+include_directories(src/vendor/)

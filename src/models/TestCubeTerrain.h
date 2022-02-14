@@ -10,14 +10,14 @@
 #include "Camera.h"
 #include "Model.h"
 #include "CubeMap.h"
-#include "Terrain.h"
+#include "CubeTerrain.h"
 
 namespace test_model {
-    class TestTerrain : public TestModel{
+    class TestCubeTerrain : public TestModel{
     public:
-        TestTerrain();
-        TestTerrain(GLFWwindow* window, int width, int height);
-        ~TestTerrain();
+        TestCubeTerrain();
+        TestCubeTerrain(GLFWwindow* window, int width, int height);
+        ~TestCubeTerrain();
 
         void OnUpdate(float deltaTime) override;
         void OnRender() override;
@@ -26,7 +26,7 @@ namespace test_model {
         float m_ClearColor[4];
         GLFWwindow* m_Window;
 
-        std::unique_ptr<Terrain> m_Terrain;
+        std::unique_ptr<CubeTerrain> m_Terrain;
         std::unique_ptr<Model> m_LightCube;
         std::unique_ptr<Model> m_Cube;
 

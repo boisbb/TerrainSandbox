@@ -1,7 +1,5 @@
 #include "Texture.h"
 
-#include "vendor/stb_image/stb_image.h"
-
 
 /**
  * @brief Construct a new Texture:: Texture object

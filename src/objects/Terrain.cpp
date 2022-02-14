@@ -1,9 +1,5 @@
-#include <math.h>
-#include <cmath>
-
 #include "Terrain.h"
 
-#include "vendor/stb_image/stb_image.h"
 
 Terrain::Terrain() 
 {

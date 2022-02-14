@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <random>
@@ -7,6 +9,7 @@
 class ProceduralGeneration {
 public:
     ProceduralGeneration();
+    ProceduralGeneration(int gridX, int gridZ);
     ProceduralGeneration(int gridX, int gridZ, int vertexCount);
 
     float GenerateHeight(int x, int z);
@@ -16,7 +19,7 @@ public:
     float GetNoise(int x, int z);
 
 private:
-    float amplitude = 100.0f;
+    float amplitude = 20.0f;
     int octaves = 3;
     float roughness = 0.2f;
 

@@ -29,6 +29,7 @@ http://docs.gl/
 
 #include "models/TestModel.h"
 #include "models/TestTerrain.h"
+#include "models/TestCubeTerrain.h"
 
 int WIDTH = 1200;
 int HEIGHT = 800;
@@ -80,6 +81,7 @@ int main(int argc, char* argv[])
 
     // testModelMenu->RegisterTestModel<test_model::CarModels>("CarModels", window, WIDTH, HEIGHT);
     testModelMenu->RegisterTestModel<test_model::TestTerrain>("TestTerrain", window, WIDTH, HEIGHT);
+    testModelMenu->RegisterTestModel<test_model::TestCubeTerrain>("TestCubeTerrain", window, WIDTH, HEIGHT);
     if (argc == 2)
     {
         currentTestModel = testModelMenu->SetTestModel(argv[1]);

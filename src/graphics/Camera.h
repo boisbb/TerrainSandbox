@@ -3,11 +3,11 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
-#include "vendor/glm/gtc/type_ptr.hpp"
-#include "vendor/glm/gtx/rotate_vector.hpp"
-#include "vendor/glm/gtx/vector_angle.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtx/vector_angle.hpp"
 
 #include "Shader.h"
 

@@ -1,11 +1,12 @@
 #pragma once
 
-#include<string>
-#include<fstream>
-#include<sstream>
-#include<iostream>
-#include<cerrno>
-
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <cerrno>
+#include <filesystem>
+#include <sys/stat.h>
 #include <vector>
 #include <stdio.h>
 #include <string>
@@ -14,7 +15,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "vendor/glm/glm.hpp"
+#include "glm/glm.hpp"
 
 #include "Mesh.h"
 

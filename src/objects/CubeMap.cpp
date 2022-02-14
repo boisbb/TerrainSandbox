@@ -1,9 +1,5 @@
 #include "CubeMap.h"
 
-#include "vendor/stb_image/stb_image.h"
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
-
 /*
     Some of the code was for Cube map was influenced by code derived from this tutorial:
     https://learnopengl.com/Advanced-OpenGL/Cubemaps

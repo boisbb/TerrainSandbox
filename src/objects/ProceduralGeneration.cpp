@@ -18,6 +18,15 @@ ProceduralGeneration::ProceduralGeneration(int gridX, int gridZ, int vertexCount
     dist = distr;
 }
 
+ProceduralGeneration::ProceduralGeneration(int gridX, int gridZ) 
+{
+    xOffset = gridX * 2;
+    zOffset = gridZ * 2;
+
+    std::uniform_real_distribution<> distr(0.0f, 1.0f);
+    dist = distr;
+}
+
 float ProceduralGeneration::GenerateHeight(int x, int z) 
 {
     //float total = GetInterpolatedNoise(x / 4.0f, z / 4.0f) * amplitude;
