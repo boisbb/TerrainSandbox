@@ -87,3 +87,8 @@ float ProceduralGeneration::GetNoise(int x, int z)
     //std::cout << result << std::endl;
     return result;
 }
+
+float ProceduralGeneration::GetAmplitude() const
+{
+    return amplitude;
+}

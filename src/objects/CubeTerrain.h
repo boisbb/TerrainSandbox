@@ -19,9 +19,11 @@ public:
     std::vector<Vertex> GenerateTerrainVertices();
     std::vector<unsigned int> GenerateTerrainIndices();
     void GenerateTerrainModel();
+    void GenerateSubsurfaceCubes(int offsetX, int offsetZ, int surfaceHeight);
     void Draw(Shader& shader, Camera& camera);
     int GetCubeHeight(int offsetX, int offsetZ);
     int GetYCoord(int offsetX, int offsetZ);
+    int GetSize();
 
 private:
     float size;
@@ -35,9 +37,12 @@ private:
     float z;
 
     std::unique_ptr<Model> terrainModel;
+    std::unique_ptr<Model> subsurfaceModel;
     std::unique_ptr<ProceduralGeneration> heightGenerator;
     std::string texturePath;
     unsigned char* terrainHeightMap;
     int mapHeight, mapWidth, mapBPP;
     std::vector<std::vector<int>> heights;
+    std::vector<Vertex> additionalVertices;
+    std::vector<unsigned int> additionalIndices;
 };

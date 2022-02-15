@@ -104,6 +104,7 @@ CubeTerrain::CubeTerrain(int gridX, int gridZ, float _size, std::string _texture
     
 
     terrainModel = std::make_unique<Model>();
+    subsurfaceModel = std::make_unique<Model>();
     GenerateTerrainModel();
 }
 
@@ -133,7 +134,9 @@ std::vector<Vertex> CubeTerrain::GenerateTerrainVertices()
     for (int i = 0; i < size; i++) {
         std::vector<int> jheights;
         for (int j = 0; j < size; j++) {
+            //std::cout << "before " << i << " " << j <<std::endl;
             int height = GetCubeHeight(j, i);
+            GenerateSubsurfaceCubes(j, i, height);
             jheights.push_back(height);
             for (int k = 0; k < 24; k++) {
                 Vertex vertex;
@@ -149,6 +152,7 @@ std::vector<Vertex> CubeTerrain::GenerateTerrainVertices()
                 std::cout << "----" << std::endl;
                 */
             }
+            //std::cout << "after" << std::endl;
         }
         heights.push_back(jheights);
 
@@ -170,22 +174,75 @@ std::vector<unsigned int> CubeTerrain::GenerateTerrainIndices()
     return indices;
 }
 
+
 void CubeTerrain::GenerateTerrainModel() 
 {
     std::vector<Vertex> vertices = GenerateTerrainVertices();
+    std::cout << "vertices generated" << std::endl;
     std::vector<unsigned int> indices = GenerateTerrainIndices();
+    std::cout << "indices generated" << std::endl;
+
+    /*
+    for (unsigned int index : indices) {
+        std::cout << index << std::endl;
+    }*/
+
+    //vertices.insert(vertices.end(), additionalVertices.begin(), additionalVertices.end());
+    //indices.insert(indices.end(), additionalIndices.begin(), additionalIndices.end());
 
     Mesh terrainMesh = Mesh(vertices, indices);
+    Mesh subsurfaceMesh = Mesh(additionalVertices, additionalIndices);
 
     // MANUALLY ENTERED SLOT WATCH OUT FOR THIS
     Texture terrainTexture(texturePath, 1);
     terrainMesh.AddTexture(terrainTexture);
     terrainModel->AddMesh(terrainMesh);
+
+    subsurfaceMesh.AddTexture(terrainTexture);
+    subsurfaceModel->AddMesh(subsurfaceMesh);
+}
+
+void CubeTerrain::GenerateSubsurfaceCubes(int offsetX, int offsetZ, int surfaceHeight)
+{
+    int minDepth = (int)((-1) * (heightGenerator->GetAmplitude() / 2));
+    int subCubesCount = abs(minDepth - surfaceHeight) / 2;
+
+    /*
+    std::cout << "surface: " << surfaceHeight << std::endl;
+    std::cout << "minDetph: " << minDepth << std::endl;
+    std::cout << "cubesCount: " << subCubesCount << std::endl;
+    std::cout << "offsetX: " << offsetX << std::endl;
+    std::cout << "offsetZ: " << offsetZ << std::endl;
+    */
+
+    int addIndicesSize = additionalIndices.size();
+    int addCubesIncrement = (addIndicesSize / 36) * 24;
+    for (int i = 0; i < subCubesCount; i++) {
+        for (int k = 0; k < 24; k++) {
+            Vertex vertex;
+            vertex.position = cubePositions[k] + glm::vec3(offsetX * 2, minDepth + (i * 2), offsetZ * 2);
+            vertex.normal = cubeNormals[k / 4];
+            vertex.texUV = cubeUVs[k % 4];
+            additionalVertices.push_back(vertex);
+            /*
+            std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
+            std::cout << vertex.normal.x << " " << vertex.normal.y << " " << vertex.normal.z << std::endl;
+            std::cout << vertex.texUV.x << " " << vertex.texUV.y << std::endl;
+            std::cout << "----" << std::endl;
+            */
+        }
+
+        for (int j = 0; j < cubeIndices.size(); j++) {
+            //additionalIndices.push_back(cubeIndices[j] + i * 24 + size * size * 24 + addIndicesSize);
+            additionalIndices.push_back(cubeIndices[j] + i * 24 + addCubesIncrement);
+        }
+    }
 }
 
 void CubeTerrain::Draw(Shader& shader, Camera& camera) 
 {
     terrainModel->Draw(shader, camera);
+    subsurfaceModel->Draw(shader, camera);
 }
 
 int CubeTerrain::GetCubeHeight(int offsetX, int offsetZ) 
@@ -219,10 +276,10 @@ int CubeTerrain::GetCubeHeight(int offsetX, int offsetZ)
     }
     else if (procedural)
     {
-        float height = heightGenerator->GenerateHeight(offsetX, offsetZ);
-        //height -= height % 2;
-        std::cout << height << std::endl;
-        return (int)height;
+        int height = (int)heightGenerator->GenerateHeight(offsetX, offsetZ);
+        height -= height % 2;
+        //std::cout << height << std::endl;
+        return height;
     }
     
 }
@@ -236,4 +293,9 @@ int CubeTerrain::GetYCoord(int offsetX, int offsetZ)
     int gridZ = (int)(terrainZ / 2);
 
     return heights[gridX][gridZ];
+}
+
+int CubeTerrain::GetSize()
+{
+    return size;
 }

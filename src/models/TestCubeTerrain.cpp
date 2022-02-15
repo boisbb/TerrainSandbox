@@ -20,8 +20,7 @@ namespace test_model
         //m_Terrain = std::make_unique<CubeTerrain>(0, 0, "../res/textures/block_game/dirt_texture_highres.jpg", "../res/textures/heightmap.png");
         m_Terrain = std::make_unique<CubeTerrain>(0, 0, 200,"../res/textures/block_game/dirt_texture_highres.jpg", true);
 
-
-        glm::vec3 camPos = glm::vec3(200, m_Terrain->GetYCoord(200, 200) + 4, 200);
+        glm::vec3 camPos = glm::vec3(m_Terrain->GetSize(), m_Terrain->GetYCoord(m_Terrain->GetSize(), m_Terrain->GetSize()) + 4, m_Terrain->GetSize());
         m_Camera = std::make_unique<Camera>(WIDTH, HEIGHT, 
                                             camPos,
                                             glm::vec3(-0.482962, -0.19509, -0.853632),

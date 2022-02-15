@@ -17,9 +17,10 @@ public:
     float interpolate(float a, float b, float blend);
     float GetSmoothNoise(int x, int z);
     float GetNoise(int x, int z);
+    float GetAmplitude() const;
 
 private:
-    float amplitude = 20.0f;
+    float amplitude = 50.0f;
     int octaves = 3;
     float roughness = 0.2f;
 
