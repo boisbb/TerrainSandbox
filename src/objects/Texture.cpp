@@ -7,11 +7,15 @@
  * @param path File path.
  * @param slot Slot of the texture.
  */
-Texture::Texture(const std::string& path, unsigned int slot) 
+Texture::Texture(const std::string& path, unsigned int slot, int rows, bool flip_on_load)
     : m_FilePath(path), unit(slot)
 {
+    numOfRows = rows;
 
-    stbi_set_flip_vertically_on_load(1);
+    if (flip_on_load)
+    {
+        stbi_set_flip_vertically_on_load(1);
+    }
     m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
 
     glGenTextures(1, &m_RendererID);
@@ -22,7 +26,7 @@ Texture::Texture(const std::string& path, unsigned int slot)
 
 	glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

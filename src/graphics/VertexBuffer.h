@@ -13,6 +13,10 @@ struct Vertex
   glm::vec3 position;
   glm::vec2 texUV;
   glm::vec3 normal;
+  // By default when not used, set to 0
+  // thats a very stupid workaround TODO
+  float meshCenterHeight = 0.0f;
+  float textureIndex = 0.0f;
 };
 
 class VertexBuffer{

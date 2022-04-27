@@ -27,6 +27,19 @@ void VertexBufferLayout::Push<unsigned int>(unsigned int count)
   m_Stride += count * VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT);
 }
 
+/**
+ * @brief Push int into layout.
+ * 
+ * @tparam  
+ * @param count 
+ */
+template<>
+void VertexBufferLayout::Push<int>(unsigned int count)
+{
+  m_Elements.push_back({ GL_INT, count, GL_FALSE });
+  m_Stride += count * VertexBufferElement::GetSizeOfType(GL_INT);
+}
+
 
 /**
  * @brief Push unsigned char into layout.

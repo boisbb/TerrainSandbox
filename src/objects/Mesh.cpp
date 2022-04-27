@@ -12,6 +12,8 @@ Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
     layout.Push<float>(3);
     layout.Push<float>(2);
     layout.Push<float>(3);
+    layout.Push<float>(1);
+    layout.Push<float>(1);
     m_VAO->AddBuffer(*m_VertexBuffer, layout);
     
 
@@ -28,6 +30,8 @@ Mesh::Mesh(std::vector<Vertex>& vertices)
     layout.Push<float>(3);
     layout.Push<float>(2);
     layout.Push<float>(3);
+    layout.Push<float>(1);
+    layout.Push<float>(1);
     m_VAO->AddBuffer(*m_VertexBuffer, layout);
     
 
@@ -58,6 +62,7 @@ void Mesh::Draw(Shader& shader, Camera& camera, glm::vec3 scale, glm::vec3 trans
     Renderer renderer;
 
     for (unsigned int i = 0; i < m_Textures.size(); i++){
+        shader.SetUniform1i("u_TextNumRows", m_Textures[i].GetNumRows());
         m_Textures[i].SetUnit(shader, "u_Texture", 1);
         m_Textures[i].Bind();
         //std::cout << "We have texture" <<std::endl;

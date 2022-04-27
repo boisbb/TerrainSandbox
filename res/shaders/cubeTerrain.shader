@@ -1,8 +1,10 @@
 #shader vertex
 #version 330 core
-layout (location = 0) in vec3 a_Pos;
+layout(location = 0) in vec3 a_Pos;
 layout(location = 1) in vec2 a_UV;
 layout(location = 2) in vec3 a_Normal;
+layout(location = 3) in float a_MeshCenter;
+layout(location = 4) in float a_TextureIndex;
 
 out VS_OUT {
     vec3 FragPos;
@@ -13,14 +15,32 @@ out VS_OUT {
 uniform mat4 u_CameraMatrix;
 uniform mat4 u_ModelMatrix;
 uniform mat4 u_Transform;
+uniform int u_TextNumRows;
+
+// Indices of textures in the atlas
+uniform vec3 u_GrassIndices;
+uniform int u_StoneIndex;
+uniform int u_SandIndex;
 
 void main()
 {
-    // multiplication of the texture coords for tiling the texture
-    // many times accross the whole plane
+    int index = int(a_TextureIndex);
+
+    
+    //if (a_MeshCenter > 11)
+    //{
+    //    index = 4;
+    //}
+
+
+    float column = index % u_TextNumRows;
+    float row = floor(index / u_TextNumRows);
+    vec2 offset = vec2((column / u_TextNumRows), (row / u_TextNumRows));
+
     vs_out.FragPos = vec3(u_ModelMatrix * vec4(a_Pos, 1.0));
     vs_out.Normal = (u_ModelMatrix * vec4(a_Normal, 0.0)).xyz;
-    vs_out.TexCoords = a_UV;
+    vs_out.TexCoords = (a_UV / u_TextNumRows) + offset;
+    //vs_out.TexCoords = a_UV;
 	gl_Position = u_CameraMatrix * vec4(u_Transform * u_ModelMatrix * vec4(a_Pos, 1.0f));
 }
 
@@ -78,6 +98,7 @@ void main()
     else{
         color = vec3(0.5, 0.5, 0.5);
     }
+
 
     vec3 lighting = vec3(0.0f, 0.0f, 0.0f);
     lighting = (ambient + diffuse + specular) * color;

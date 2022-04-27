@@ -20,7 +20,7 @@ public:
     float GetAmplitude() const;
 
 private:
-    float amplitude = 50.0f;
+    float amplitude = 100.0f;
     int octaves = 3;
     float roughness = 0.2f;
 
